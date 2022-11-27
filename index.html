@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/49ec53f2ec.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="context">
+        <form class="search">
+            <input type="text" placeholder="Enter city name" id="searchInput"/>
+            <button type="submit" class="search_button">
+                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+        <div class="box">
+            <div class="col">
+                <div class="row">
+                    <img class="col" src="images/sun_cloud.png" alt="sun_cloud">
+                    <div class="col ">
+                        <p class="temperature">
+                            <span id="degrees">17</span><span>°C</span> 
+                        </p>
+                        <a href="#" id="convert">
+                            Fahrenheit
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col current">
+                <h2 class="city">
+                    Lodz
+                </h2>
+                <p class="currentDay">
+                    Saturday
+                </p>
+                <p class="date">
+                    30.10.2022
+                </p>
+                <p class="time">
+                    19:17
+                </p>
+            </div>
+        </div>
+        <div class="row daysList">
+            <div class="col">
+                <p class="day" >
+                    Friday
+                </p>
+                <img src="images/sun.png" alt="sun">
+            </div>
+            <div class="col">
+                <p class="day" >
+                    Tues
+                </p>
+                <img src="images/cloud_sun.png" alt="cloud_sun">
+            </div>
+            <div class="col">
+                <p class="day" >
+                    Wedne
+                </p>
+                <img src="images/rain.png" alt="rain">
+            </div>
+            <div class="col">
+                <p class="day" >
+                    Thurs
+                </p>
+                <img src="images/storm.png" alt="storm">
+            </div>
+            <div class="col">
+                <p class="day" >
+                    monday
+                </p>
+                <img src="images/fog.png" alt="fog">
+            </div>
+        </div>
+    </div>
+    <script src="src/index.js"></script>
+</body>
+</html>
