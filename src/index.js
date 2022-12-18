@@ -2,9 +2,12 @@ let myKey = "bd3bb6534458ba51b48c49f5155745b6";
 let city = document.querySelector("#searchInput");
 let myDate = document.querySelector(".date");
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
 let temperature = document.querySelector("#degrees");
 let tempvalue = Number(temperature.textContent);
+let description = document.querySelector("#description");
+let humidityValue = document.querySelector("#humidity_value");
+let windSpeed = document.querySelector("#wind_speed");
+let mainImage = document.querySelector("#main_image");
 
 function calcTime(offset) {
     // create Date object for current location
@@ -15,8 +18,13 @@ function calcTime(offset) {
 }
 
 function setInfo(response){
-    temperature.textContent = (Math.round(response.data.main.temp));
-    tempvalue = Number(temperature.textContent);
+    mainImage.setAttribute("src", `images/${response.data.weather[0].icon}.png` );
+    description.textContent = response.data.weather[0].description;
+    humidityValue.textContent = response.data.main.humidity;
+    windSpeed.textContent = response.data.wind.speed;
+    let currenttemp = (Math.round(response.data.main.temp));
+    tempElement.innerHTML = `<span id="degrees">${currenttemp}°</span><span>C</span>`;
+    tempvalue = Number(currenttemp);
     let currentCity = response.data.name;
     document.querySelector(".city").textContent = currentCity;
     let timezone = response.data.timezone;
@@ -44,6 +52,7 @@ function setInfo(response){
             count = 0;
         }
     }
+    convertLink.textContent = "Fahrenheit" ;
 
 }
 
@@ -64,9 +73,8 @@ function setPosition(position){
 function changeCity(event) {
     event.preventDefault();
     let cityWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${myKey}&units=metric`;
-    axios.get(cityWeatherUrl).then((response) => {setInfo(response); console.log(response)});
-    console.log(city.value);
-
+    axios.get(cityWeatherUrl).then((response) => {setInfo(response)});
+    
 }
 let tempElement = document.querySelector(".temperature")
 
@@ -77,10 +85,10 @@ function convertDegrees(event){
     if(event.target.textContent === "Fahrenheit"){
         let fahranheit = celsiousToFahranheit(tempvalue);
         fahranheit = Math.floor(fahranheit);
-        tempElement.innerHTML = `${fahranheit}°<span>F</span>`;
+        tempElement.innerHTML = `<span id="degrees">${fahranheit}°</span><span>F</span>`;
         event.target.textContent = "Celsius";
     } else {
-        tempElement.innerHTML = `${tempvalue}°<span>C</span>`;
+        tempElement.innerHTML = `<span id="degrees">${tempvalue}°</span><span>C</span>`;
         event.target.textContent = "Fahrenheit";
     }
 }
