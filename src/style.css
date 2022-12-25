@@ -47,6 +47,8 @@ input {
 }
 .day {
     font-size: 20px;
+    text-align: center;
+    margin-top: 1rem;
 }
 .currentDay{
     font-size: 25px;
@@ -65,4 +67,14 @@ input {
     list-style: none;
     padding: 0;
     font-size: 12px;
+}
+.forecastTemp{
+    display: flex;
+    justify-content: space-around;
+    
+}
+.dailyForecast{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

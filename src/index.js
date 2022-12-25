@@ -16,6 +16,41 @@ function calcTime(offset) {
     let newDate = new Date(utc + (3600000*(offset/3600)));
     return newDate;
 }
+function formatDay(tempDate){
+    let date = new Date(tempDate * 1000);
+    let day = date.getDay();
+    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
+        "Saturday"]
+    return days[day];
+}
+function displayForecast(response){
+    console.log(response.data.daily)
+    let forecast = response.data.daily;
+    let forecastElement = document.querySelector("#forecast")
+    let forecastHTMl = "";
+    forecast.forEach(function(forecastDay, index){
+        if (index > 0 && index<6){
+        forecastHTMl += `
+    <div class="col dailyForecast">
+        <p class="day" >
+        ${formatDay(forecastDay.dt)}
+        </p>
+        <img src="images/${forecastDay.weather[0].icon}.png" alt="sun" id = "dailyIcon">
+        <div class="forecastTemp">
+            <span class="minTemp">${Math.round(forecastDay.temp.max)}°</span>
+            <span class="maxTemp">${Math.round(forecastDay.temp.min)}°</span>
+        </div>
+    </div>`}
+    })
+    
+ 
+    forecastElement.innerHTML = forecastHTMl;
+}
+
+function getForecast(coordinates) {
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${myKey}&units=metric`;
+    axios.get(apiUrl).then(displayForecast);
+}
 
 function setInfo(response){
     mainImage.setAttribute("src", `images/${response.data.weather[0].icon}.png` );
@@ -36,24 +71,9 @@ function setInfo(response){
     myDate.textContent = `${date}.${month+1}.${year}`;
     let myTime = document.querySelector(".time");
     myTime.textContent = `${String(time.getHours()).padStart(2, '0')}:${String(time.getMinutes()).padStart(2, '0')}`
-    let myDay = document.querySelector(".currentDay")
-    myDay.textContent = days[day]
-    let count = day;
-    let idCount = 0;
-    let daysList = document.querySelectorAll(".day")
-    while(idCount !=5 ){
-        if (count < 6 ){
-            count += 1;
-            let tempDay = daysList[idCount];
-            tempDay.textContent = days[count];
-            idCount +=1; 
-        }
-        else{
-            count = 0;
-        }
-    }
     convertLink.textContent = "Fahrenheit" ;
-
+    getForecast(response.data.coord);
+    
 }
 
 if ('geolocation' in navigator){
@@ -74,7 +94,6 @@ function changeCity(event) {
     event.preventDefault();
     let cityWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${myKey}&units=metric`;
     axios.get(cityWeatherUrl).then((response) => {setInfo(response)});
-    
 }
 let tempElement = document.querySelector(".temperature")
 
@@ -96,5 +115,4 @@ let search = document.querySelector(".search");
 search.addEventListener("submit", changeCity);
 let convertLink = document.querySelector("#convert");
 convertLink.addEventListener("click", convertDegrees);
-
 
