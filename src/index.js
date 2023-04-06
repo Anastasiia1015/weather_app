@@ -1,4 +1,4 @@
-let myKey = "bd3bb6534458ba51b48c49f5155745b6";
+const myKey = "bd3bb6534458ba51b48c49f5155745b6";
 let city = document.querySelector("#searchInput");
 let myDate = document.querySelector(".date");
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
