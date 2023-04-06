@@ -20,7 +20,7 @@ In this Project the following technologies were used:
 
 ## Try the App
 
-You can try the app by visiting the following link: https://illustrious-salamander-989763.netlify.app/
+You can try the app by visiting the following [link](https://illustrious-salamander-989763.netlify.app/)
 
 ## API Keys
 
