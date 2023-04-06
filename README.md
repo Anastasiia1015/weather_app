@@ -1,4 +1,4 @@
-# Weather Web Appliccation Project
+# Weather Web Application Project
 
 This is a web application project that displays weather information for you.
 
